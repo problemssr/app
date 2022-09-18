@@ -1,0 +1,16 @@
+{
+    "compileOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "@/*": [
+                "src/*"
+            ]
+            //@等价于src
+        }
+    },
+    //不能在"node_modules","dist"使用@
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
