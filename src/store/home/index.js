@@ -37,7 +37,7 @@ const actions = {
     // 获取首页轮播图数据
     async getBannerList({ commit }) {
         let res = await reqGetBannerList();
-        console.log(res);
+        // console.log(res);
         if (res.code == 200) {
             commit('GETBANNERLIST', res.data)
         }
