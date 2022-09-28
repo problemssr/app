@@ -230,6 +230,7 @@ export default {
     // 自定义事件回调
     trademarkInfo(trademark) {
       // console.log(1111,trademark);
+      //子传父（父）绑定自定义事件，得到emit过来的值
       // 整理品牌字段
       this.searchParams.trademark = `${trademark.tmId}:${trademark.tmName}`;
       // 再次发请求

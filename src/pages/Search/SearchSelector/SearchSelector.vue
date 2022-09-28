@@ -4,7 +4,11 @@
       <div class="fl key brand">品牌</div>
       <div class="value logos">
         <ul class="logo-list">
-          <li v-for="(trademark, index) in trademarkList" :key="index" @click="trademarkHandler(trademark)">
+          <li
+            v-for="(trademark, index) in trademarkList"
+            :key="index"
+            @click="trademarkHandler(trademark)"
+          >
             {{ trademark.tmName }}
           </li>
         </ul>
@@ -21,7 +25,11 @@
       <div class="fl value">
         <ul class="type-list">
           <!-- 平台售卖的属性的属性值：粉色，蓝色... -->
-          <li v-for="(attrValue, index) in attrs.attrValueList" :key="index" @click="attrInfo(attrs,attrValue)">
+          <li
+            v-for="(attrValue, index) in attrs.attrValueList"
+            :key="index"
+            @click="attrInfo(attrs, attrValue)"
+          >
             <a>{{ attrValue }}</a>
           </li>
         </ul>
@@ -41,14 +49,15 @@ export default {
   methods: {
     // 品牌处理函数
     trademarkHandler(trademark) {
+      //子传父（子）（发送emit自定义事件和参数）
       // 点击品牌（苹果），还需整理参数，向服务器发请求获取相应数据进行展示
       this.$emit("trademarkInfo", trademark);
     },
     // 平台售卖属性值的点击事件
-    attrInfo(attrs,attrValue){
+    attrInfo(attrs, attrValue) {
       // ["属性ID:属性值:属性名"]
-      this.$emit("attrInfo",attrs,attrValue)
-    }
+      this.$emit("attrInfo", attrs, attrValue);
+    },
   },
 };
 </script>
