@@ -66,7 +66,12 @@
     </div>
     <div class="cart-tool">
       <div class="select-all">
-        <input class="chooseAll" type="checkbox" :checked="isAllChecked&&cartInfoList.length>0" @change="updateAllCartChecked"/>
+        <input
+          class="chooseAll"
+          type="checkbox"
+          :checked="isAllChecked && cartInfoList.length > 0"
+          @change="updateAllCartChecked"
+        />
         <span>全选</span>
       </div>
       <div class="option">
@@ -81,7 +86,9 @@
           <i class="summoney">{{ totalPrice }}</i>
         </div>
         <div class="sumbtn">
-          <a class="sum-btn" @click="$router.push('/trade')" target="_blank">结算</a>
+          <a class="sum-btn" @click="$router.push('/trade')" target="_blank"
+            >结算</a
+          >
         </div>
       </div>
     </div>
@@ -177,34 +184,34 @@ export default {
         alert(error.message);
       }
     },
-     //删除全部选中的产品
+    //删除全部选中的产品
     //这个回调函数咱门没办法收集到一些有用数据
     async deleteAllCheckedCart() {
       try {
-         //派发一个action
+        //派发一个action
         await this.$store.dispatch("deleteAllCheckedCart");
-         //再发请求获取购物车列表
+        //再发请求获取购物车列表
         this.getData();
       } catch (error) {
         alert(error.message);
       }
-      
     },
     //修改全部产品的选中状态
-    async updateAllCartChecked(event){
+    async updateAllCartChecked(event) {
       try {
-        let isChecked=event.target.checked?'1':'0'
+        let isChecked = event.target.checked ? "1" : "0";
         // 派发action
-        await this.$store.dispatch("updateAllCartChecked",isChecked)
-        this.getData()
+        await this.$store.dispatch("updateAllCartChecked", isChecked);
+        this.getData();
       } catch (error) {
-        alert(error.message)
+        alert(error.message);
       }
-    }
+    },
   },
   computed: {
     ...mapGetters(["cartList"]),
     cartInfoList() {
+      // 需要空
       return this.cartList.cartInfoList || [];
     },
     //计算产品总价
