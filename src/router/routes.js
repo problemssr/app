@@ -10,18 +10,18 @@ import GroupOrder from '@/pages/Center/groupOrder'
 export default [
     {
         path: "/home",
-        component: ()=>import('@/pages/Home'),
+        component: () => import('@/pages/Home'),
         meta: { show: true }
     },
     {
         path: "/detail/:skuid",
-        component: ()=>import('@/pages/Detail'),
+        component: () => import('@/pages/Detail'),
         meta: { show: true }
     },
     {
         path: "/addcartsuccess",
         name: 'addcartsuccess',
-        component: ()=>import('@/pages/AddCartSuccess'),
+        component: () => import('@/pages/AddCartSuccess'),
         meta: { show: true }
     },
     {
@@ -33,14 +33,14 @@ export default [
     {
         path: "/trade",
         name: 'trade',
-        component: ()=>import('@/pages/Trade'),
+        component: () => import('@/pages/Trade'),
         meta: { show: true },
         // 路由独享守卫
-        beforeEnter: (to, from, next)=>{
+        beforeEnter: (to, from, next) => {
             // 去交易页面，必须从购物车而来
-            if(from.path=='/shopcart'){
+            if (from.path == '/shopcart') {
                 next()
-            }else{
+            } else {
                 // 其他的路由组件而来，停留在当前
                 // next(false): 中断当前的导航。（从哪来回哪去）
                 // 如果浏览器的 URL 改变了 (可能是用户手动或者浏览器后退按钮)，那么 URL 地址会重置到 from 路由对应的地址。
@@ -51,14 +51,14 @@ export default [
     {
         path: "/pay",
         name: 'pay',
-        component: ()=>import('@/pages/Pay'),
+        component: () => import('@/pages/Pay'),
         meta: { show: true },
-        beforeEnter:(to,from,next)=>{
+        beforeEnter: (to, from, next) => {
             // 去支付页，从交易页来的
-            if(from.path=='/trade'){
+            if (from.path == '/trade') {
                 next()
-            }else{
-                 // 其他的路由组件而来，停留在当前
+            } else {
+                // 其他的路由组件而来，停留在当前
                 next(false)
             }
         }
@@ -66,27 +66,27 @@ export default [
     {
         path: "/paysuccess",
         name: 'paysuccess',
-        component: ()=>import('@/pages/PaySuccess'),
+        component: () => import('@/pages/PaySuccess'),
         meta: { show: true }
     },
     {
         path: "/center",
         name: 'center',
-        component: ()=>import('@/pages/Center'),
+        component: () => import('@/pages/Center'),
         meta: { show: true },
         // 二级路由组件
-        children:[
+        children: [
             {
-                path:'myorder',
-                component:MyOrder
+                path: 'myorder',
+                component: MyOrder
             },
             {
-                path:'grouporder',
-                component:GroupOrder
+                path: 'grouporder',
+                component: GroupOrder
             },
             {
-                path:'/center',
-                redirect:'/center/myorder'
+                path: '/center',
+                redirect: '/center/myorder'
             }
         ]
     },
@@ -107,17 +107,65 @@ export default [
     },
     {
         path: "/login",
-        component: ()=>import('@/pages/Login'),
+        component: () => import('@/pages/Login'),
         meta: { show: false }
     },
     {
         path: "/register",
-        component: ()=>import('@/pages/Register'),
+        component: () => import('@/pages/Register'),
         meta: { show: false }
     },
     // 重定向，在项目跑起来时访问/，立马定向到首页
     {
         path: '*',
         redirect: "/home"
-    }
+    },
+    {
+        path: '/communication',
+        component: () => import('@/pages/Communication/Communication'),
+        children: [
+            {
+                path: 'event',
+                component: () => import('@/pages/Communication/EventTest/EventTest'),
+                meta: {
+                    isHideFooter: true
+                },
+            },
+            {
+                path: 'model',
+                component: () => import('@/pages/Communication/ModelTest/ModelTest'),
+                meta: {
+                    isHideFooter: true
+                },
+            },
+            {
+                path: 'sync',
+                component: () => import('@/pages/Communication/SyncTest/SyncTest'),
+                meta: {
+                    isHideFooter: true
+                },
+            },
+            {
+                path: 'attrs-listeners',
+                component: () => import('@/pages/Communication/AttrsListenersTest/AttrsListenersTest'),
+                meta: {
+                    isHideFooter: true
+                },
+            },
+            {
+                path: 'children-parent',
+                component: () => import('@/pages/Communication/ChildrenParentTest/ChildrenParentTest'),
+                meta: {
+                    isHideFooter: true
+                },
+            },
+            {
+                path: 'scope-slot',
+                component: () => import('@/pages/Communication/ScopeSlotTest/ScopeSlotTest'),
+                meta: {
+                    isHideFooter: true
+                },
+            }
+        ],
+    },
 ]
